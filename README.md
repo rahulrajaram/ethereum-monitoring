@@ -6,7 +6,7 @@ A Docker-based Grafana + Prometheus monitoring solution for Ethereum nodes runni
 
 ## Features
 
-- **Pre-configured dashboards** for Geth and Prysm (downloaded from original sources)
+- **Pre-configured Prometheus dashboards** for Geth and Prysm
 - **Docker Compose** setup for easy deployment
 - **LAN accessible** - monitor from any device on your network
 - **Persistent storage** for metrics history
@@ -18,7 +18,6 @@ A Docker-based Grafana + Prometheus monitoring solution for Ethereum nodes runni
 
 - Docker and Docker Compose installed
 - Geth and Prysm running with metrics enabled (see [Node Configuration](#node-configuration))
-- `curl` installed (for downloading dashboards)
 
 ### 1. Clone the repository
 
@@ -33,7 +32,7 @@ cd ethereum-monitoring
 ./setup.sh
 ```
 
-This downloads the Grafana dashboards from their original sources and creates your `.env` file.
+This creates your `.env` file from the template.
 
 ### 3. Configure your environment
 
@@ -69,7 +68,7 @@ docker compose up -d
 Open `http://YOUR_SERVER_IP:3000` in your browser.
 
 - **Default username:** `admin`
-- **Default password:** Set in your `.env` file
+- **Default password:** Set in your `.env` file (default: `changeme`)
 
 ## Node Configuration
 
@@ -94,28 +93,28 @@ Add these flags to your Prysm beacon node startup command:
 
 ## Dashboards
 
-Dashboards are downloaded from their original sources during setup:
+Custom Prometheus-compatible dashboards are included:
 
 ### Geth Dashboard
-- **Source:** [Grafana Labs #13877](https://grafana.com/grafana/dashboards/13877)
-- **Metrics:** Peer connections, sync progress, chain head, database metrics, gas usage
+- **Metrics:** Head block, peer connections (total/inbound/outbound), chain data size, transaction pool, CPU load, RPC requests
 
-### Prysm Dashboard (ETH Staking)
-- **Source:** [GuillaumeMiralles/prysm-grafana-dashboard](https://github.com/GuillaumeMiralles/prysm-grafana-dashboard)
-- **Metrics:** Head slot and epoch, finalized epoch, beacon peers, attestation statistics
+### Prysm Beacon Node Dashboard
+- **Metrics:** Head slot, finalized/justified epochs, slots behind network, peer connections, attestations, active validators, reorgs
 
 ## Directory Structure
 
 ```
 .
-├── setup.sh                 # Downloads dashboards and creates .env
+├── setup.sh                 # Creates .env file
 ├── docker-compose.yml       # Main compose (Docker network mode)
 ├── docker-compose.standalone.yml  # For non-Docker node setups
 ├── .env.example             # Template for environment variables
 ├── prometheus/
 │   └── prometheus.yml       # Prometheus scrape configuration
 └── grafana/
-    ├── dashboards/          # Downloaded by setup.sh
+    ├── dashboards/          # Pre-configured Prometheus dashboards
+    │   ├── geth.json
+    │   └── prysm.json
     └── provisioning/
         ├── datasources/
         │   └── datasources.yml
@@ -130,7 +129,7 @@ Dashboards are downloaded from their original sources during setup:
 | Variable | Description | Default |
 |----------|-------------|---------|
 | `GRAFANA_ADMIN_USER` | Grafana admin username | `admin` |
-| `GRAFANA_ADMIN_PASSWORD` | Grafana admin password | `ethereum` |
+| `GRAFANA_ADMIN_PASSWORD` | Grafana admin password | `changeme` |
 | `PROMETHEUS_RETENTION` | Metrics retention period | `30d` |
 | `GRAFANA_PORT` | Grafana web UI port | `3000` |
 | `PROMETHEUS_PORT` | Prometheus web UI port | `9090` |
@@ -176,9 +175,8 @@ chmod -R 644 grafana/provisioning/*/*.yml
 
 ### Dashboards not appearing
 
-Re-run the setup script to download dashboards:
+Restart Grafana to reload dashboards:
 ```bash
-./setup.sh
 docker compose restart grafana
 ```
 
@@ -190,14 +188,9 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-**Note:** The Grafana dashboards are downloaded from third-party sources and are subject to their respective licenses:
-- Geth Dashboard: [Grafana Labs](https://grafana.com/grafana/dashboards/13877)
-- Prysm Dashboard: [GuillaumeMiralles](https://github.com/GuillaumeMiralles/prysm-grafana-dashboard)
-
 ## Acknowledgments
 
 - [Geth](https://geth.ethereum.org/) - Go Ethereum
 - [Prysm](https://prysmaticlabs.com/) - Ethereum Consensus Client
 - [Grafana](https://grafana.com/) - Observability Platform
 - [Prometheus](https://prometheus.io/) - Monitoring System
-- Dashboard authors for their contributions to the community
