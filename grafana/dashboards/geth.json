@@ -40,7 +40,11 @@
         "defaults": {
           "color": {"mode": "thresholds"},
           "mappings": [],
-          "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}]},
+          "thresholds": {"mode": "absolute", "steps": [
+            {"color": "red", "value": null},
+            {"color": "yellow", "value": 5},
+            {"color": "green", "value": 10}
+          ]},
           "unit": "none"
         },
         "overrides": []
@@ -90,7 +94,11 @@
         "defaults": {
           "color": {"mode": "thresholds"},
           "mappings": [],
-          "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}]},
+          "thresholds": {"mode": "absolute", "steps": [
+            {"color": "green", "value": null},
+            {"color": "yellow", "value": 5000},
+            {"color": "red", "value": 10000}
+          ]},
           "unit": "none"
         },
         "overrides": []
@@ -168,10 +176,14 @@
             "showPoints": "never",
             "spanNulls": false,
             "stacking": {"group": "A", "mode": "none"},
-            "thresholdsStyle": {"mode": "off"}
+            "thresholdsStyle": {"mode": "line"}
           },
           "mappings": [],
-          "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}]},
+          "thresholds": {"mode": "absolute", "steps": [
+            {"color": "red", "value": null},
+            {"color": "yellow", "value": 5},
+            {"color": "green", "value": 10}
+          ]},
           "unit": "none"
         },
         "overrides": []
@@ -209,10 +221,14 @@
             "showPoints": "never",
             "spanNulls": false,
             "stacking": {"group": "A", "mode": "none"},
-            "thresholdsStyle": {"mode": "off"}
+            "thresholdsStyle": {"mode": "line"}
           },
           "mappings": [],
-          "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}]},
+          "thresholds": {"mode": "absolute", "steps": [
+            {"color": "green", "value": null},
+            {"color": "yellow", "value": 5000},
+            {"color": "red", "value": 10000}
+          ]},
           "unit": "none"
         },
         "overrides": []
@@ -286,11 +302,16 @@
             "showPoints": "never",
             "spanNulls": false,
             "stacking": {"group": "A", "mode": "none"},
-            "thresholdsStyle": {"mode": "off"}
+            "thresholdsStyle": {"mode": "line"}
           },
           "mappings": [],
-          "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}]},
-          "unit": "percentunit"
+          "thresholds": {"mode": "absolute", "steps": [
+            {"color": "green", "value": null},
+            {"color": "yellow", "value": 0.7},
+            {"color": "red", "value": 0.9}
+          ]},
+          "unit": "percentunit",
+          "max": 1
         },
         "overrides": []
       },
