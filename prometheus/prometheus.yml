@@ -1,0 +1,35 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  # Geth (Execution Client) metrics
+  # Requires: geth --metrics --metrics.addr 0.0.0.0 --metrics.port 6060
+  - job_name: 'geth'
+    scrape_interval: 10s
+    metrics_path: /debug/metrics/prometheus
+    static_configs:
+      # For Docker network: use container name
+      - targets: ['eth-node:6060']
+      # For standalone: use host IP
+      # - targets: ['host.docker.internal:6060']
+      # - targets: ['192.168.1.100:6060']
+        labels:
+          instance: 'geth-mainnet'
+
+  # Prysm Beacon Node metrics
+  # Requires: --monitoring-host=0.0.0.0 --monitoring-port=8080
+  - job_name: 'prysm-beacon'
+    static_configs:
+      # For Docker network: use container name
+      - targets: ['prysm:8080']
+      # For standalone: use host IP
+      # - targets: ['host.docker.internal:8080']
+      # - targets: ['192.168.1.100:8080']
+        labels:
+          instance: 'prysm-mainnet'
+
+  # Prometheus self-monitoring (optional)
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
