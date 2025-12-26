@@ -184,7 +184,8 @@
             {"color": "yellow", "value": 5},
             {"color": "green", "value": 10}
           ]},
-          "unit": "none"
+          "unit": "none",
+          "min": 0
         },
         "overrides": []
       },
@@ -229,7 +230,8 @@
             {"color": "yellow", "value": 5000},
             {"color": "red", "value": 10000}
           ]},
-          "unit": "none"
+          "unit": "none",
+          "min": 0
         },
         "overrides": []
       },
@@ -265,11 +267,16 @@
             "showPoints": "never",
             "spanNulls": false,
             "stacking": {"group": "A", "mode": "none"},
-            "thresholdsStyle": {"mode": "off"}
+            "thresholdsStyle": {"mode": "line"}
           },
           "mappings": [],
-          "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}]},
-          "unit": "decgbytes"
+          "thresholds": {"mode": "absolute", "steps": [
+            {"color": "green", "value": null},
+            {"color": "yellow", "value": 500},
+            {"color": "red", "value": 750}
+          ]},
+          "unit": "decgbytes",
+          "min": 0
         },
         "overrides": []
       },

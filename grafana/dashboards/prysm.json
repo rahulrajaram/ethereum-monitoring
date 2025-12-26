@@ -287,7 +287,8 @@
             {"color": "yellow", "value": 10},
             {"color": "green", "value": 20}
           ]},
-          "unit": "none"
+          "unit": "none",
+          "min": 0
         },
         "overrides": []
       },
@@ -412,7 +413,8 @@
             {"color": "yellow", "value": 2},
             {"color": "red", "value": 5}
           ]},
-          "unit": "none"
+          "unit": "none",
+          "min": 0
         },
         "overrides": []
       },
